@@ -1,0 +1,10 @@
+{% extends 'testapp/base.html' %}
+
+{% block content %}
+    <h1>Do you want to Delete {{meals.name}} </h1>
+    <form method="post">
+       {% csrf_token %}
+      <input type="submit" value="yes conform!" class="btn btn-outline-danger "/>
+      <a href="/list" class="btn btn-outline-info "> no I want delete</a>
+    </form>
+  {% endblock %}

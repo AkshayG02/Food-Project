@@ -1,0 +1,42 @@
+{% extends 'testapp/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Your Cart 🛒</h2>
+
+    {% if cart_items %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Food</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.food.name }}</td>
+                <td>{{ item.food.price }}.Rs</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.total_price }}.Rs</td>
+                <td>
+                    <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4>Total: {{ total }}.Rs</h4>
+    <a href="/list" class="btn btn-warning">Continue Shopping</a>
+    {% else %}
+    <p>Your cart is empty.</p>
+    <a href="/list" class="btn btn-primary">Browse Foods</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'testapp/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+
+    <h1>Add your fav foods</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {{form.as_p}} {% csrf_token %}
+      <input type="submit" value="Add" />
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
